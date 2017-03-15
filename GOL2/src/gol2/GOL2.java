@@ -20,10 +20,12 @@ public class GOL2 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        stage.setTitle("Game Of Life");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
+        // make scene non responsive
+        stage.setResizable(false);
         
         
     }
@@ -33,6 +35,7 @@ public class GOL2 extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        System.exit(0);
     
     }
     

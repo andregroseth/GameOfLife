@@ -7,20 +7,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.8361204013377926" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1074.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol2.Controller">
+<SplitPane fx:id="splitPane" dividerPositions="0.8361204013377926" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1074.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gol2.Controller">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Canvas fx:id="canvas" height="766.0" layoutX="1.0" width="891.0" />
+            <Canvas fx:id="canvas" height="766.0" onMouseClicked="#canvasMouseEvent" onMouseDragged="#canvasMouseEvent" width="891.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="154.0">
          <children>
             <VBox layoutX="4.0" layoutY="14.0" prefHeight="766.0" prefWidth="161.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="172.0" text="Start" />
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="181.0" text="Reset" />
+                  <Button fx:id="start" mnemonicParsing="false" onAction="#startButton" prefHeight="39.0" prefWidth="172.0" text="Start" />
+                  <Button fx:id="reset" mnemonicParsing="false" onAction="#resetButton" prefHeight="39.0" prefWidth="181.0" text="Reset" />
                   <TextField alignment="CENTER" text="Grid Color" />
-                  <ColorPicker prefHeight="39.0" prefWidth="198.0" />
+                  <ColorPicker fx:id="colorPicker" prefHeight="39.0" prefWidth="198.0" />
+                  <TextField alignment="CENTER" text="SplitPane Color" />
+                  <ColorPicker fx:id="colorPicker2" onAction="#splitPane" prefHeight="39.0" prefWidth="198.0" />
                   <TextField alignment="TOP_CENTER" text="Speed" />
                   <ScrollBar orientation="VERTICAL" prefHeight="157.0" prefWidth="161.0" />
                   <TextField alignment="CENTER" text="Grid Size" />
