@@ -33,17 +33,23 @@ import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
@@ -85,7 +91,7 @@ public class Controller implements Initializable {
     @FXML public Button rules;
     @FXML public Label generationCounter;
     @FXML public Button Snapshot;
-    
+    @FXML public Button RLEurl;
     
    private double time;
    private double startSpeed = 6;
@@ -127,7 +133,7 @@ public class Controller implements Initializable {
     * Transferring array from a pattern into the array used to draw the cells.
     * @param newMove 
     */
-   public void loadVisualization(boolean [][] newMove){
+   private void loadVisualization(boolean [][] newMove){
         for( int y =0; y < newMove.length; y++){
             for( int x =0; x < newMove[y].length; x++){    
                 currentMove [y+wid/2][x+hei/2] = newMove [y][x];                     
@@ -150,7 +156,53 @@ public class Controller implements Initializable {
         // TODO: handle exception here
     }
 }
- 
+    
+    /**
+     * Imports RLE file from URL 
+     * @param e POPup windows with text field input for URL address
+     */
+    @FXML
+    public void URLreader(ActionEvent e){
+        Stage URLWindow = new Stage();
+        URLWindow.initModality(Modality.APPLICATION_MODAL);
+        Label URLlabel = new Label();
+        TextField URLfield = new TextField();
+        HBox URLtext = new HBox(5);
+        URLtext.getChildren().addAll(URLlabel,URLfield);
+        URLtext.setAlignment(Pos.CENTER);
+        URLlabel.setStyle("-fx-font: 24 sans-serif;");
+        URLlabel.setText("URL:");
+        URLWindow.setTitle("RLE URL Import");
+        URLWindow.setMinWidth(600);
+        URLWindow.setMinHeight(300);
+        Button Import = new Button();
+        Import.setText("Import RLE URL");
+        Import.setStyle("-fx-font: 24 sans-serif;");
+        Import.setOnAction(event -> {
+            String URLimport = URLfield.getText();
+            //http://www.conwaylife.com/patterns/gosperglidergun.rle
+            //reset 
+        currentMove = new boolean[move][move];
+        numberOfGenerations = 0;
+        String generationText = Long.toString(numberOfGenerations);
+        generationCounter.setText(generationText);
+        background();
+        GridAndCells.PaintGrid(gc, canvas, hei, wid);
+        //import URL RLE
+        loadVisualization(RunLengthEncoding.decode(RunLengthEncoding.RLEurl(URLimport)));
+        background();
+        GridAndCells.CellActivation(gc, canvas, hei, wid, currentMove, colorPicker2);
+        GridAndCells.PaintGrid(gc, canvas, hei, wid);
+        URLWindow.close();
+        });
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(URLtext,Import);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(layout);
+        URLWindow.setScene(scene);
+        URLWindow.showAndWait();
+        
+    }
     /**
      * Imports RLE files from computer.
      * @param e Waits for button click to be performed before running this method (Import RLE Files).
@@ -342,7 +394,7 @@ public class Controller implements Initializable {
     /**
      * Draws the Grid and background color.
      */
-    public void background(){
+    private void background(){
         gc= canvas.getGraphicsContext2D();
         //Trenger ikke disse 2 linjene
         gc.setFill(Color.WHITE);     
@@ -386,7 +438,7 @@ public class Controller implements Initializable {
    /**
     * Random generates live cells on the canvas.
     */
-   public void RandomGeneration(){
+   private void RandomGeneration(){
        gc = canvas.getGraphicsContext2D();
        Random G = new Random();
        for(int y = 0; y<hei;y++){

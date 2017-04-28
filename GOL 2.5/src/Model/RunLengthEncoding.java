@@ -8,6 +8,10 @@ package Model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
@@ -145,5 +149,34 @@ public class RunLengthEncoding {
     
 
     }// End Of Rules
-    
+  
+     /**
+      * 
+      * @param URLimport Imports and decodes RLE files from URL address and displays error if the file is not RLE format.
+      * @return 
+      */
+     public static String RLEurl(String URLimport){
+         
+         String Text = " ";  
+         
+         try{
+             URL textbox = new URL(URLimport);
+             URLConnection loadPage = textbox.openConnection();
+             Reader pageReader = new InputStreamReader(loadPage.getInputStream());
+             BufferedReader reader = new BufferedReader(pageReader);
+             
+             
+            String readLine = reader.readLine();
+            while (readLine != null){
+                Text +=" "+readLine;
+                readLine =reader.readLine();}
+                
+         }catch(Exception error){
+             System.err.println("Wrong file format. Please use RLE file format");
+             displayError("Error","Wrong file format. Please use RLE file format");
+         }return Text;
+         
+         }//End of RLEurl
+     
+     
 }//End of class

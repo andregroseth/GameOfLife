@@ -43,8 +43,8 @@
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="180.0" text="Grid Size" />
                   <Slider fx:id="gridBar" blockIncrement="40.0" max="250.0" min="50.0" onMouseClicked="#GridBar" onMouseDragged="#GridBar" prefHeight="40.0" prefWidth="180.0" value="50.0" />
                   <Button fx:id="fileChooser" mnemonicParsing="false" onAction="#FileImport" prefHeight="40.0" prefWidth="180.0" text="RLE File Import" />
+                  <Button fx:id="rleURL" mnemonicParsing="false" onAction="#URLreader" prefHeight="40.0" prefWidth="180.0" text="RLE URL Import" />
                   <Button fx:id="Snapshot" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Snapshot" prefHeight="40.0" prefWidth="180.0" text="PNG Canvas Snap" textAlignment="CENTER" />
-                  <Button fx:id="gridShape" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Grid Shape" />
                   <Button fx:id="Rules" mnemonicParsing="false" onAction="#rulesButton" prefHeight="40.0" prefWidth="180.0" text="Rules" />
                   <Label alignment="CENTER" prefHeight="40.0" prefWidth="180.0" text="Number Of Generations" textAlignment="CENTER" />
                   <Label fx:id="generationCounter" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="180.0" text="0" />
@@ -65,7 +65,7 @@
                <children>
                   <ImageView fitHeight="766.0" fitWidth="780.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="http://vignette2.wikia.nocookie.net/jfx/images/9/9a/JavaFXCup350x400.png/revision/latest?cb=20070618131103" />
+                        <Image url="https://javatweets.files.wordpress.com/2013/07/java_coffee_artwork_art_beans_desktop_1024x768_hd-wallpaper-7653.jpg" />
                      </image>
                   </ImageView>
                </children>
